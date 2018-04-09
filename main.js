@@ -7,11 +7,11 @@ return items[Math.floor(Math.random() * 3)];
 // Changes player selection icon
 function imageChange() {
   const playerRock = document.querySelector('.rock');
-  playerRock.addEventListener('click', () => {document.querySelector('.playerSelection').src='images/rock_white.svg';});
+  playerRock.addEventListener('click', () => {document.querySelector('.playerSelection').src='images/rock_player.svg';});
   const playerPaper = document.querySelector('.paper');
-  playerPaper.addEventListener('click', () => {document.querySelector('.playerSelection').src='images/paper_white.svg';});
+  playerPaper.addEventListener('click', () => {document.querySelector('.playerSelection').src='images/paper_player.svg';});
   const playerScissor = document.querySelector('.scissor');
-  playerScissor.addEventListener('click', () => {document.querySelector('.playerSelection').src='images/scissors_white.svg';});
+  playerScissor.addEventListener('click', () => {document.querySelector('.playerSelection').src='images/scissors_player.svg';});
 }
 
 // Invokes functions on click
@@ -37,11 +37,11 @@ function playRound(playerSelection, computerSelection) {
 // Changes computer selection icon
   function computerImage(computerSelection){
     if(computerSelection == "ROCK"){
-      document.querySelector('.computerSelection').src='images/rock_white.svg';
+      document.querySelector('.computerSelection').src='images/rock_computer.svg';
     }else if(computerSelection == "PAPER"){
-      document.querySelector('.computerSelection').src='images/paper_white.svg';
+      document.querySelector('.computerSelection').src='images/paper_computer.svg';
     }else{
-      document.querySelector('.computerSelection').src='images/scissors_white.svg';
+      document.querySelector('.computerSelection').src='images/scissors_computer.svg';
     }
   }
 
