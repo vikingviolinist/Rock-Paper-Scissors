@@ -134,17 +134,18 @@ button:active{
 }
 
 @media screen and (max-width: 480px) {
+  .pageTitle{
+    font-size: 2em;
+  }
   .playerSelection, .computerSelection {
     height:5em;
   }
-
   .rock, .paper, .scissor{
     height: 4em;
     width: 4em;
   }
-
-  .pageTitle{
-    font-size: 2em;
+  .buttons, .restartButton {
+  bottom: 3vh;
   }
 }
 
