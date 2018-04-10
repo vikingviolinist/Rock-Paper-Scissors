@@ -12,7 +12,7 @@ button{
 }
 
 span{
-  font-size: 1.2em;
+  font-size: 1.4em;
   display: inline;
 }
 button:hover{
@@ -86,14 +86,14 @@ button:active{
 .buttons{
   text-align: center;
   position: fixed;
-  bottom: 10vh;
+  bottom: 6vh;
   width: 100%;
 }
 
 .restartButton{
   text-align: center;
   position: fixed;
-  bottom: 10vh;
+  bottom: 6vh;
   width: 100%;
 }
 
