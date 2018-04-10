@@ -44,7 +44,7 @@ button:active{
 
 .restart{
   background-color: #FEFFFF;
-  border-radius: 0%;
+  border-radius: 5px;
   height: auto;
   width: auto;
 }
@@ -119,6 +119,10 @@ button:active{
 }
 
 @media screen and (max-width: 740px) {
+  .playerSelection, .computerSelection {
+    height:6em;
+  }
+
   .rock, .paper, .scissor{
     height: 5em;
     width: 5em;
@@ -126,6 +130,21 @@ button:active{
 
   .pageTitle{
     font-size: 3em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .playerSelection, .computerSelection {
+    height:5em;
+  }
+
+  .rock, .paper, .scissor{
+    height: 4em;
+    width: 4em;
+  }
+
+  .pageTitle{
+    font-size: 2em;
   }
 }
 
