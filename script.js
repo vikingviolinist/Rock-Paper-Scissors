@@ -69,16 +69,16 @@ function playRound(playerSelection, computerSelection) {
         //display winner of match and reset
         if(plays == 5){
           if (playerScore < computerScore){
-            document.querySelector('.finalResult').textContent="GAME OVER! You lost";
+            document.querySelector('.finalResult').textContent="You lost";
             document.querySelector('.finalResult').style.color="#ff0000";
           }
           if (playerScore > computerScore){
-            document.querySelector('.finalResult').textContent="Congratulations! You won!";
+            document.querySelector('.finalResult').textContent="You won!";
             document.querySelector('.finalResult').style.color="#00ff00";
           }
           if (playerScore == computerScore){
             document.querySelector('.finalResult').textContent="It\'s a tie!";
-            document.querySelector('.finalResult').style.color="orange";
+            document.querySelector('.finalResult').style.color="#0000ff";
           }
 
           //remove buttons and result notes at the end of 5 rounds

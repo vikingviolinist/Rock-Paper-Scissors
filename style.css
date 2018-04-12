@@ -145,7 +145,7 @@ button:active{
     width: 4em;
   }
   .buttons, .restartButton {
-  bottom: 3vh;
+  bottom: 5vh;
   }
 }
 
@@ -162,4 +162,5 @@ button:active{
 .finalResult{
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 3em;
+  margin-bottom: 0;
 }
