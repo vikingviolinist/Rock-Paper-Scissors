@@ -1,102 +1,105 @@
-// Generates a random computer selection
+// Generate a random computer selection
 function computerPlay() {
-const items = ["rock", "paper", "scissor"];
+const items = ["rock", "paper", "scissors"];
 return items[Math.floor(Math.random() * 3)];
 }
 
-// Changes player selection icon
+const $playerRock = $('.rock');
+const $playerPaper = $('.paper');
+const $playerScissors = $('.scissors');
+
+// Change player selection icon on click
 function imageChange() {
-  const playerRock = document.querySelector('.rock');
-  playerRock.addEventListener('click', () => {document.querySelector('.playerSelection').src='images/rock_player.svg';});
-  const playerPaper = document.querySelector('.paper');
-  playerPaper.addEventListener('click', () => {document.querySelector('.playerSelection').src='images/paper_player.svg';});
-  const playerScissor = document.querySelector('.scissor');
-  playerScissor.addEventListener('click', () => {document.querySelector('.playerSelection').src='images/scissors_player.svg';});
+  $playerRock.on('click', () => {
+    $('.playerSelection').attr('src', 'images/rock_lg.svg')
+  });
+  $playerPaper.on('click', () => {
+    $('.playerSelection').attr('src', 'images/paper_lg.svg')
+  });
+  $playerScissors.on('click', () => {
+    $('.playerSelection').attr('src', 'images/scissors_lg.svg')
+  });
 }
 
-// Invokes functions on click
-const playerRock = document.querySelector('.rock');
-playerRock.addEventListener('click', playRound, imageChange());
-const playerPaper = document.querySelector('.paper');
-playerPaper.addEventListener('click', playRound, imageChange());
-const playerScissor = document.querySelector('.scissor');
-playerScissor.addEventListener('click', playRound, imageChange());
+// Invoke functions on click
+$playerRock.on('click', playRound, imageChange());
+$playerPaper.on('click', playRound, imageChange());
+$playerScissors.on('click', playRound, imageChange());
 
-// Initializes values
+// Initialize values
 let plays = 0;
 let computerScore = 0;
 let playerScore = 0;
 
+// Play single round
 function playRound(playerSelection, computerSelection) {
   playerSelection = this.className.toUpperCase();
   computerSelection = computerPlay().toUpperCase();
   plays++;
+  $('.rounds').text('ROUND ' + plays);
 
-  document.querySelector('.rounds').textContent="ROUND " + plays;
-
-// Changes computer selection icon
-  function computerImage(computerSelection){
-    if(computerSelection == "ROCK"){
-      document.querySelector('.computerSelection').src='images/rock_computer.svg';
-    }else if(computerSelection == "PAPER"){
-      document.querySelector('.computerSelection').src='images/paper_computer.svg';
-    }else{
-      document.querySelector('.computerSelection').src='images/scissors_computer.svg';
+// Change computer selection icon
+  function computerImage(computerSelection) {
+    if (computerSelection === "ROCK"){
+      $('.computerSelection').attr('src', 'images/rock_lg.svg')
+    } else if (computerSelection === "PAPER") {
+      $('.computerSelection').attr('src', 'images/paper_lg.svg')
+    } else {
+      $('.computerSelection').attr('src', 'images/paper_lg.svg')
     }
   }
 
+  // Get result
   computerImage(computerSelection);
-  //get results
-  if(playerSelection === "ROCK" && computerSelection === "ROCK" ||
-   playerSelection === "PAPER" && computerSelection === "PAPER" ||
-   playerSelection === "SCISSOR" && computerSelection === "SCISSOR"){
-     document.querySelector('.result').textContent="It\'s a draw!";
+  if (playerSelection === 'ROCK' && computerSelection === 'ROCK' ||
+    playerSelection === 'PAPER' && computerSelection === 'PAPER' ||
+    playerSelection === 'SCISSORS' && computerSelection === 'SCISSORS') {
+      $('.result').text('It\'s a draw!');
 
-    }else if(playerSelection === "ROCK" && computerSelection === "PAPER" ||
-             playerSelection === "PAPER" && computerSelection === "SCISSOR" ||
-             playerSelection === "SCISSOR" && computerSelection === "ROCK"){
-               document.querySelector('.result').textContent="You lose! " + computerSelection + " beats " + playerSelection;
+    } else if (playerSelection === 'ROCK' && computerSelection === 'PAPER' ||
+             playerSelection === 'PAPER' && computerSelection === 'SCISSORS' ||
+             playerSelection === 'SCISSORS' && computerSelection === 'ROCK'){
+               $('.result').text(`You lose!  ${computerSelection} beats ${playerSelection}`);
                computerScore++;
 
-        }else{
-          document.querySelector('.result').textContent="You win! " + playerSelection + " beats " + computerSelection;
-          playerScore++;
+    } else {
+        $('.result').text(`You win! ${playerSelection} beats ${computerSelection}`);
+        playerScore++;
+      }
+
+      // Show score
+      $('.playerScore').text(` ${playerScore}`);
+      $('.computerScore').text(` ${computerScore}`);
+
+      // Display winner of match and reset
+      if(plays === 5){
+        if (playerScore < computerScore){
+          $('.finalResult').text('You lost');
+          $('.finalResult').css('color', '#f00');
         }
-        //display score results
-        document.querySelector('.playerScore').textContent="  " + playerScore;
-        document.querySelector('.computerScore').textContent="  " + computerScore;
+        if (playerScore > computerScore){
+          $('.finalResult').text('You won!');
+          $('.finalResult').css('color', '#0f0');
+        }
+        if (playerScore === computerScore){
+          $('.finalResult').text('It\'s a tie!');
+          $('.finalResult').css('color', '#00f');
+        }
 
-        //display winner of match and reset
-        if(plays == 5){
-          if (playerScore < computerScore){
-            document.querySelector('.finalResult').textContent="You lost";
-            document.querySelector('.finalResult').style.color="#ff0000";
-          }
-          if (playerScore > computerScore){
-            document.querySelector('.finalResult').textContent="You won!";
-            document.querySelector('.finalResult').style.color="#00ff00";
-          }
-          if (playerScore == computerScore){
-            document.querySelector('.finalResult').textContent="It\'s a tie!";
-            document.querySelector('.finalResult').style.color="#0000ff";
-          }
+        // Reset buttons and final result after five rounds
+        var elem = document.querySelector('.buttons');
+        elem.parentNode.removeChild(elem);
+        var elem = document.querySelector('.result');
+        elem.parentNode.removeChild(elem);
 
-          //remove buttons and result notes at the end of 5 rounds
-          //create new button to reload page
-          var elem = document.querySelector('.buttons');
-          elem.parentNode.removeChild(elem);
-          var elem = document.querySelector('.result');
-          elem.parentNode.removeChild(elem);
-          const butt = document.createElement('button');
-          butt.classList.add('restart');
-          butt.textContent='Play again';
-          butt.setAttribute('style','font-size:2.5em;')
-          const startNew = document.querySelector('.restartButton');
-          startNew.appendChild(butt);
-
-          //reload page
-          butt.addEventListener('click', () => {
+        // Create button to start a new game and reload page on click
+        const btn = $('<button>');
+        btn.addClass('restart')
+          .text('Play again')
+          .appendTo($('.restartButton'))
+          .on('click', () => {
             location.reload();
           });
-        }
+
+      }
 }
