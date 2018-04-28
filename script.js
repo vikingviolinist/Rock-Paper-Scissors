@@ -45,7 +45,7 @@ function playRound(playerSelection, computerSelection) {
     } else if (computerSelection === "PAPER") {
       $('.computerSelection').attr('src', 'images/paper_lg.svg')
     } else {
-      $('.computerSelection').attr('src', 'images/paper_lg.svg')
+      $('.computerSelection').attr('src', 'images/scissors_lg.svg')
     }
   }
 
@@ -56,50 +56,47 @@ function playRound(playerSelection, computerSelection) {
     playerSelection === 'SCISSORS' && computerSelection === 'SCISSORS') {
       $('.result').text('It\'s a draw!');
 
-    } else if (playerSelection === 'ROCK' && computerSelection === 'PAPER' ||
-             playerSelection === 'PAPER' && computerSelection === 'SCISSORS' ||
-             playerSelection === 'SCISSORS' && computerSelection === 'ROCK'){
-               $('.result').text(`You lose!  ${computerSelection} beats ${playerSelection}`);
-               computerScore++;
+  } else if (playerSelection === 'ROCK' && computerSelection === 'PAPER' ||
+            playerSelection === 'PAPER' && computerSelection === 'SCISSORS' ||
+            playerSelection === 'SCISSORS' && computerSelection === 'ROCK'){
+              $('.result').text(`You lose!  ${computerSelection} beats ${playerSelection}`);
+              computerScore++;
 
-    } else {
-        $('.result').text(`You win! ${playerSelection} beats ${computerSelection}`);
-        playerScore++;
+  } else {
+      $('.result').text(`You win! ${playerSelection} beats ${computerSelection}`);
+      playerScore++;
+    }
+
+    // Show score
+    $('.playerScore').text(` ${playerScore}`);
+    $('.computerScore').text(` ${computerScore}`);
+
+    // Display winner of match and reset
+    if (plays === 5) {
+      if (playerScore < computerScore){
+        $('.finalResult').text('You lost');
+        $('.finalResult').css('color', '#f00');
+      }
+      if (playerScore > computerScore){
+        $('.finalResult').text('You won!');
+        $('.finalResult').css('color', '#0f0');
+      }
+      if (playerScore === computerScore){
+        $('.finalResult').text('It\'s a tie!');
+        $('.finalResult').css('color', '#00f');
       }
 
-      // Show score
-      $('.playerScore').text(` ${playerScore}`);
-      $('.computerScore').text(` ${computerScore}`);
+      // Reset buttons after five rounds
+      $('.buttons').empty();
 
-      // Display winner of match and reset
-      if(plays === 5){
-        if (playerScore < computerScore){
-          $('.finalResult').text('You lost');
-          $('.finalResult').css('color', '#f00');
-        }
-        if (playerScore > computerScore){
-          $('.finalResult').text('You won!');
-          $('.finalResult').css('color', '#0f0');
-        }
-        if (playerScore === computerScore){
-          $('.finalResult').text('It\'s a tie!');
-          $('.finalResult').css('color', '#00f');
-        }
+      // Display button to start a new game and reload page on click
+      const btn = $('<button>');
+      btn.addClass('restart')
+        .text('Play again')
+        .appendTo($('.restartButton'))
+        .on('click', () => {
+          location.reload();
+        });
 
-        // Reset buttons and final result after five rounds
-        var elem = document.querySelector('.buttons');
-        elem.parentNode.removeChild(elem);
-        var elem = document.querySelector('.result');
-        elem.parentNode.removeChild(elem);
-
-        // Create button to start a new game and reload page on click
-        const btn = $('<button>');
-        btn.addClass('restart')
-          .text('Play again')
-          .appendTo($('.restartButton'))
-          .on('click', () => {
-            location.reload();
-          });
-
-      }
+    }
 }
